@@ -3,7 +3,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 
-const connection = require("./db_connection/connection");
 const fileUpload = require("express-fileupload");
 
 const loginpage = require("./routes/loginpage");
