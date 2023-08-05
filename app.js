@@ -34,7 +34,7 @@ app.use("/api/verify", verify);
 
 mongoose
   .connect(
-    "mongodb+srv://Afnan:vsRNdYVON8KOV7iG@cluster0.9yjfa.mongodb.net/heart-disease?retryWrites=true&w=majority",
+    process.env.CONNECTION_STRING,
     {
       useUnifiedTopology: true,
       useNewUrlParser: true,
