@@ -8,15 +8,9 @@ const PasswordEncryption = async (password) => {
   return encryptedPassword;
 };
 
+const passwordComparison = async (password, hashPassword) => {
+  const isPasswordValid = await bcrypt.compare(password, hashPassword);
+  return isPasswordValid;
+};
 
-const passwordComparison = async(password,hashPassword) =>{
-
-
-  const isPasswordValid = await bcrypt.compare(password,hashPassword)
-
-
-return isPasswordValid
-
-}
-
-module.exports ={ PasswordEncryption,passwordComparison}
+module.exports = { PasswordEncryption, passwordComparison };

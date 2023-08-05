@@ -13,9 +13,7 @@ const {
 } = require("../helpers/tokeneEcryption");
 router.post("/logindata", async (req, res) => {
   const { username, emailaddress, password } = req.body;
-  const {
-    picture: { name },
-  } = req.files;
+
   try {
     const isuserAvailable = await usersSchema.findOne({
       emailaddress: emailaddress,
@@ -33,7 +31,6 @@ router.post("/logindata", async (req, res) => {
       username,
       emailaddress,
       password: hashedPassword,
-      profileImage: name,
     });
 
     const newUserSaved = await newUserInsertion.save();
@@ -48,33 +45,12 @@ router.post("/logindata", async (req, res) => {
 
     const cryptoToken = CryptoEncyption(istoken);
 
-    await mkdirp("public/profileImages/" + newUserSaved._id);
-
-    if (name !== "") {
-      const pathName = "public/profileImages/" + newUserSaved._id + "/" + name;
-
-      const storage = req.files.picture;
-
-      const hasError = await storage.mv(pathName);
-
-      if (hasError) {
-        const deleteAccount = await usersSchema.findOneAndDelete({
-          _id: newUserSaved._id,
-        });
-
-        return res.json({
-          success: false,
-          message: "unable to create account,try again",
-        });
-      } else {
-        return res.json({
-          success: true,
-          message: "Account has Been created successfully.",
-          newUserSaved,
-          jwttoken: cryptoToken,
-        });
-      }
-    }
+    return res.json({
+      success: true,
+      message: "Account has Been created successfully.",
+      newUserSaved,
+      jwttoken: cryptoToken,
+    });
   } catch (error) {
     return res.json({
       success: false,
@@ -110,20 +86,18 @@ router.post("/verifyloginpage", async (req, res) => {
       return res.json({
         success: false,
         message: "You are not Authorized,try again!",
-        
       });
     }
     return res.json({
       success: false,
       message: "You are not Authorized,try again!",
-    
     });
   } catch (error) {
-    console.log("error",error)
+    console.log("error", error);
     return res.json({
       success: false,
       message: "You are not Authorized,try again!",
-      error: error
+      error: error,
     });
   }
 });

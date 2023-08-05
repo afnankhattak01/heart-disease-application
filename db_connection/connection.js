@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
-
 const Connection = async () => {
   try {
     const isConnected = await mongoose.connect(
-      "mongodb://127.0.0.1:27017/spaceX",
-      { useNewUrlParser: true }
+      "mongodb+srv://Afnan:vsRNdYVON8KOV7iG@cluster0.9yjfa.mongodb.net/heart-disease?retryWrites=true&w=majority",
+      { useUnifiedTopology: true, useNewUrlParser: true }
     );
 
     if (isConnected) {
