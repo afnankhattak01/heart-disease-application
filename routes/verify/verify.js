@@ -9,13 +9,13 @@ const Transport = require("nodemailer-sendinblue-transport");
 const transporter = nodemailer.createTransport(
   new Transport({ apiKey: process.env.SEND_IN_BLUE_API_KEY })
 );
-
+console.log(process.env.SEND_IN_BLUE_API_KEY);
 const bcrypt = require("bcrypt");
 router.post("/verifyemail", async (req, res) => {
   const { emailAddress } = req.body;
-
+console.log("email address found",emailAddress)
   const isEmailValid = await UserSchema.findOne({ emailaddress: emailAddress });
-
+console.log("email address found",isEmailValid)
   if (!isEmailValid) {
     return res.status(500).json({
       success: false,
