@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const app = express();
 
 const fileUpload = require("express-fileupload");
+const cors = require("cors");
 const loginpage = require("./routes/loginpage");
 const verification = require("./routes/verify");
 const graceCalculation = require("./routes/calculations/graceriskScore");
@@ -14,11 +15,11 @@ const deleter = require("./routes/deleteRecord/delete");
 const verify = require("./routes/verify/verify");
 
 app.use(express.static("public"));
-// app.use(
-//   cors({
-//     origin: "*",
-//   })
-// );
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
