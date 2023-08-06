@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const TimiRiskSchema = require("../../models/timiRisk");
+const verifyToken = require("../../helpers/checkverify");
 
+router.use(verifyToken);
 router.post("/timirisk", async (req, res) => {
   const {
     patientAge,

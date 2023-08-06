@@ -3,6 +3,9 @@ const router = express.Router();
 const graceSchema = require("../../models/graceRiskModal");
 const firminghamSchema = require("../../models/firminghamRisk");
 const timiSchema = require("../../models/timiRisk");
+const verifyToken = require("../../helpers/checkverify");
+
+router.use(verifyToken);
 router.get("/fetch", async (req, res) => {
   const { email, type } = req.query;
 

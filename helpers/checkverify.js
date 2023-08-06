@@ -3,7 +3,6 @@ const { CryptoDecryption } = require("../helpers/tokeneEcryption");
 const signUpschema = require("../models/signup");
 
 const ChecVerify = async (req, res, next) => {
-
   let token = req.headers.authorization.split(" ")[1];
 
   let decryptedToken = CryptoDecryption(token);
@@ -27,7 +26,10 @@ const ChecVerify = async (req, res, next) => {
       next();
     }
   } catch (error) {
-    next();
+    return res.status(401).json({
+      success: false,
+      message: "User UnAuthorized",
+    });
   }
 };
 

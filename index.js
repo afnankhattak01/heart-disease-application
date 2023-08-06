@@ -6,7 +6,7 @@ const app = express();
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
 const loginpage = require("./routes/loginpage");
-const verification = require("./routes/verify");
+const verification = require("./helpers/checkverify");
 const graceCalculation = require("./routes/calculations/graceriskScore");
 const firminghamScore = require("./routes/calculations/firminghamScore");
 const timiCalculation = require("./routes/calculations/timiroskCalc");
@@ -25,16 +25,13 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(fileUpload());
 app.use("/api/loginpage", loginpage);
-app.use("/api/userverification", verification);
-app.use("/api/riskcalculation", graceCalculation);
+app.use("/api/verify", verify);
 
+app.use("/api/riskcalculation", graceCalculation);
 app.use("/api/firmingham", firminghamScore);
 app.use("/api/timi", timiCalculation);
-
 app.use("/api/fetchRecord", fetcher);
 app.use("/api/delete", deleter);
-
-app.use("/api/verify", verify);
 
 mongoose
   .connect(process.env.CONNECTION_STRING, {

@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const graceSchema = require("../../models/graceRiskModal");
+const verifyToken = require("../../helpers/checkverify");
 
+router.use(verifyToken);
 router.post("/gracerisk", async (req, res) => {
   const {
     patientAge,
