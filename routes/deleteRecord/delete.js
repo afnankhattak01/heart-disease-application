@@ -3,9 +3,7 @@ const router = express.Router();
 const graceSchema = require("../../models/graceRiskModal");
 const firminghamSchema = require("../../models/firminghamRisk");
 const timiSchema = require("../../models/timiRisk");
-const verifyToken = require("../../helpers/checkverify");
 
-router.use(verifyToken);
 router.post("/deleteRecord", async (req, res) => {
   const { emailAddress, modalType } = req.body;
   try {

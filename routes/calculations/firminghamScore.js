@@ -1,9 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const firminghamSchema = require("../../models/firminghamRisk");
-const verifyToken = require("../../helpers/checkverify");
 
-router.use(verifyToken);
 router.post("/firminghamRisk", async (req, res) => {
   const {
     patientAge,
