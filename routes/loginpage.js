@@ -43,13 +43,11 @@ router.post("/logindata", async (req, res) => {
     }
     let istoken = CreateToken(newUserSaved);
 
-    const cryptoToken = CryptoEncyption(istoken);
-
     return res.json({
       success: true,
       message: "Account has Been created successfully.",
       newUserSaved,
-      jwttoken: cryptoToken,
+      jwttoken: istoken,
     });
   } catch (error) {
     return res.json({
@@ -75,12 +73,11 @@ router.post("/verifyloginpage", async (req, res) => {
 
       if (isPasswordValid) {
         let istoken = CreateToken(isUserAValidUser);
-        const cryptoToken = CryptoEncyption(istoken);
         return res.json({
           success: true,
           message: "Login Success",
           isUserAValidUser,
-          jwttoken: cryptoToken,
+          jwttoken: istoken,
         });
       }
       return res.json({

@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const graceSchema = require("../../models/graceRiskModal");
+const { requireAuth } = require("../../helpers/requireAuth");
+
+router.use(requireAuth);
 
 router.post("/gracerisk", async (req, res) => {
   const {

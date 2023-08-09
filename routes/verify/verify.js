@@ -12,9 +12,7 @@ const transporter = nodemailer.createTransport(
 const bcrypt = require("bcrypt");
 router.post("/verifyemail", async (req, res) => {
   const { emailAddress } = req.body;
-console.log("email address found",emailAddress)
   const isEmailValid = await UserSchema.findOne({ emailaddress: emailAddress });
-console.log("email address found",isEmailValid)
   if (!isEmailValid) {
     return res.status(500).json({
       success: false,

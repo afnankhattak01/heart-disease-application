@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const TimiRiskSchema = require("../../models/timiRisk");
+const { requireAuth } = require("../../helpers/requireAuth");
 
+router.use(requireAuth);
 router.post("/timirisk", async (req, res) => {
   const {
     patientAge,

@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const firminghamSchema = require("../../models/firminghamRisk");
+const { requireAuth } = require("../../helpers/requireAuth");
 
+router.use(requireAuth);
 router.post("/firminghamRisk", async (req, res) => {
   const {
     patientAge,
