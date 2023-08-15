@@ -22,6 +22,7 @@ router.post("/addnewpassword", async (req, res) => {
         message: "User not found",
       });
     }
+    // comment!
     const isPasswordValid = await bcryt.compare(password, user.password);
     if (isPasswordValid) {
       try {
