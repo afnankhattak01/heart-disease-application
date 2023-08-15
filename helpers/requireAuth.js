@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const signUpschema = require("../models/signup");
 
 const requireAuth = async (req, res, next) => {
+  console.log("req headers",req.headers)
   const { authorization } = req.headers;
 
   if (!authorization) {
@@ -20,7 +21,6 @@ const requireAuth = async (req, res, next) => {
       .select("_id");
     next();
   } catch (error) {
-    console.log(error);
     res
       .status(401)
       .json({ message: "Not authorized for this request!", success: false });

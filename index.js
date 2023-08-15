@@ -12,7 +12,8 @@ const timiCalculation = require("./routes/calculations/timiroskCalc");
 const fetcher = require("./routes/fetchRecord/fetch");
 const deleter = require("./routes/deleteRecord/delete");
 const verify = require("./routes/verify/verify");
-
+const heartDiseasePrediction = require("./routes/heartdiseaseprediction/predictheartdiseas");
+const passwordReset = require("./routes/passwordreset/passwordreset");
 app.use(express.static("public"));
 app.use(
   cors({
@@ -23,14 +24,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(fileUpload());
-app.use("/api/loginpage", loginpage);
+// app.use("/api/loginpage", loginpage);
 
-app.use("/api/riskcalculation", graceCalculation);
-app.use("/api/firmingham", firminghamScore);
-app.use("/api/timi", timiCalculation);
-app.use("/api/fetchRecord", fetcher);
-app.use("/api/delete", deleter);
-app.use("/api/verify", verify);
+// app.use("/api/riskcalculation", graceCalculation);
+// app.use("/api/firmingham", firminghamScore);
+// app.use("/api/timi", timiCalculation);
+
+
+
+app.use("/api/heartdisease",heartDiseasePrediction)
+
+app.use("/api/resetpassword",passwordReset)
+
+// app.use("/api/fetchRecord", fetcher);
+// app.use("/api/delete", deleter);
+// app.use("/api/verify", verify);
 
 mongoose
   .connect(process.env.CONNECTION_STRING, {
