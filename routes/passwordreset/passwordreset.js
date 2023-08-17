@@ -3,17 +3,22 @@ const router = express.Router();
 const bcryt = require("bcrypt");
 const Users = require("../../models/signup");
 const { requireAuth } = require("../../helpers/requireAuth");
-
-router.use(requireAuth);
+const Joi = require("joi");
+const addNewPassword = Joi.object({
+  password: Joi.string().min(3).max(32).required("Password is required!"),
+  newPassword: Joi.string().min(3).max(32).required("Password is required!"),
+});
+// router.use(requireAuth);
 router.post("/addnewpassword", async (req, res) => {
-  const { password, newPassword } = req.body;
-  if (!password || !newPassword) {
+  const { error, value } = addNewPassword.validate(req.body, {
+    abortEarly: false,
+  });
+  if (error) {
     return res.status(400).json({
-      message: "Missing password or new Password field!",
       success: false,
+      message: error.details.map((err) => err.message),
     });
   }
-
   try {
     const user = await Users.findById(req.user._id);
     if (!user) {
@@ -23,11 +28,14 @@ router.post("/addnewpassword", async (req, res) => {
       });
     }
     // comment!
-    const isPasswordValid = await bcryt.compare(password, user.password);
+    const isPasswordValid = await bcryt.compare(
+      req.body.password,
+      user.password
+    );
     if (isPasswordValid) {
       try {
         const salt = await bcryt.genSalt(10);
-        const hashedPassword = await bcryt.hash(newPassword, salt);
+        const hashedPassword = await bcryt.hash(req.body.newPassword, salt);
         user.password = hashedPassword;
         const newUser = await user.save();
         if (newUser) {
