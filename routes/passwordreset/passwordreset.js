@@ -8,7 +8,7 @@ const addNewPassword = Joi.object({
   password: Joi.string().min(3).max(32).required("Password is required!"),
   newPassword: Joi.string().min(3).max(32).required("Password is required!"),
 });
-// router.use(requireAuth);
+router.use(requireAuth);
 router.post("/addnewpassword", async (req, res) => {
   const { error, value } = addNewPassword.validate(req.body, {
     abortEarly: false,

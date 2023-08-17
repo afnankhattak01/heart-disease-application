@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 const signUpschema = require("../models/signup");
 
 const requireAuth = async (req, res, next) => {
-  console.log("req headers",req.headers)
   const { authorization } = req.headers;
 
   if (!authorization) {
