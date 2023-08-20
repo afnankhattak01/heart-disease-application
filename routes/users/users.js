@@ -1,11 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const graceSchema = require("../../models/graceRiskModal");
 const { requireAuth } = require("../../helpers/requireAuth");
-const { Grace } = require("../../controllers/newgracerisk");
+const { UserController } = require("../../controllers/usercontroller");
 
 router.use(requireAuth);
-
-router.post("/graceriskcalculate", Grace);
+router.get("/users", UserController);
 
 module.exports = router;

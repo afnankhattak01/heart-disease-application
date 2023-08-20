@@ -7,11 +7,9 @@ const {
   passwordComparison,
 } = require("../helpers/passwordEnc");
 const CreateToken = require("../helpers/jwt");
-const {
-  CryptoEncyption,
-  CryptoDecryption,
-} = require("../helpers/tokeneEcryption");
+
 router.post("/logindata", async (req, res) => {
+  console.log("req body", req.body);
   const { username, emailaddress, password } = req.body;
 
   try {
@@ -36,7 +34,7 @@ router.post("/logindata", async (req, res) => {
     const newUserSaved = await newUserInsertion.save();
 
     if (!newUserSaved) {
-      return res.json({
+      return res.status(500).json({
         success: false,
         message: "unable to create account,try again",
       });
@@ -50,10 +48,10 @@ router.post("/logindata", async (req, res) => {
       jwttoken: istoken,
     });
   } catch (error) {
-    return res.json({
+    return res.status(500).json({
       success: false,
       message: "unable to create account,try again",
-      error: error.message,
+      error: error,
     });
   }
 });

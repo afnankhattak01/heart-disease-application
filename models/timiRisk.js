@@ -1,62 +1,49 @@
 const mongoose = require("mongoose");
-
 const schema = mongoose.Schema;
 
-const timiRiskSchema = new schema(
+const TimiSchema = new schema(
   {
-    modalType: {
-      type: String,
-      default: "TIMI",
+    user: {
+      type: schema.Types.ObjectId,
+      ref: "users",
     },
 
-    emailAddress: {
-      type: String,
+    result: {
+      type: Object,
       required: true,
     },
-    patientAge: {
-      type: Number,
-      required: true,
-    },
-    heartRate: {
-      type: Number,
-      required: true,
-    },
-    systolicBloodPressure: {
-      type: Number,
-      required: true,
-    },
-
-    killip: {
+    q1: {
       type: String,
       required: true,
     },
-    weight: {
-      type: Number,
-      required: true,
-    },
-    angina: {
-      type: Boolean,
-      required: true,
-    },
-    LBBB: {
-      type: Boolean,
-      required: true,
-    },
-    timetoTreatment: {
-      type: Number,
+    q2: {
+      type: String,
       required: true,
     },
 
-    timiRisk: {
-      type: Number,
+    q3: {
+      type: String,
       required: true,
     },
-    riskPercentage: {
-      type: Number,
+
+    q4: {
+      type: String,
+      required: true,
+    },
+    q5: {
+      type: String,
+      required: true,
+    },
+    q6: {
+      type: String,
+      required: true,
+    },
+    q7: {
+      type: String,
       required: true,
     },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("timiRisk", timiRiskSchema);
+module.exports = mongoose.model("TimiRisk", TimiSchema);

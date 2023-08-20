@@ -1,31 +1,18 @@
 const mongoose = require("mongoose");
-
 const schema = mongoose.Schema;
 
 const firminghamSchema = new schema(
   {
-    modalType: {
-      type: String,
-      default: "FIRMINGHAM",
+    user: {
+      type: schema.Types.ObjectId,
+      ref: "users",
     },
 
-    emailAddress: {
-      type: String,
+    result: {
+      type: Object,
       required: true,
     },
-    patientAge: {
-      type: Number,
-      required: true,
-    },
-    hdlCholesterol: {
-      type: Number,
-      required: true,
-    },
-    systolicBloodPressure: {
-      type: Number,
-      required: true,
-    },
-    totalCholesterol: {
+    age: {
       type: Number,
       required: true,
     },
@@ -33,20 +20,25 @@ const firminghamSchema = new schema(
       type: String,
       required: true,
     },
-    smoker: {
-      type: Boolean,
-      required: true,
-    },
-    bloodPressureTreated: {
-      type: Boolean,
-      required: true,
-    },
 
-    firminghamScore: {
+    total_cholesterol: {
       type: Number,
       required: true,
     },
-    deathProbability: {
+
+    hdl_cholesterol: {
+      type: Number,
+      required: true,
+    },
+    systolic_bp: {
+      type: Number,
+      required: true,
+    },
+    smoker: {
+      type: Number,
+      required: true,
+    },
+    bp_treatment: {
       type: Number,
       required: true,
     },
@@ -54,4 +46,4 @@ const firminghamSchema = new schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("firminghamScore", firminghamSchema);
+module.exports = mongoose.model("firmingham", firminghamSchema);

@@ -14,6 +14,9 @@ const deleter = require("./routes/deleteRecord/delete");
 const verify = require("./routes/verify/verify");
 const heartDiseasePrediction = require("./routes/heartdiseaseprediction/predictheartdiseas");
 const passwordReset = require("./routes/passwordreset/passwordreset");
+const profile = require("./routes/profile/profile");
+const Users = require("./routes/users/users");
+
 app.use(express.static("public"));
 app.use(
   cors({
@@ -24,21 +27,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(fileUpload());
+// all working apis so far!
 app.use("/api/loginpage", loginpage);
-
-app.use("/api/riskcalculation", graceCalculation);
-app.use("/api/firmingham", firminghamScore);
-app.use("/api/timi", timiCalculation);
-
-
-
-app.use("/api/heartdisease",heartDiseasePrediction)
-
-app.use("/api/resetpassword",passwordReset)
-
-app.use("/api/fetchRecord", fetcher);
-app.use("/api/delete", deleter);
+app.use("/api/resetpassword", passwordReset);
 app.use("/api/verify", verify);
+
+// after login
+app.use("/api/profile", profile);
+app.use("/api/getAll", Users);
+app.use("/api/heartdisease", heartDiseasePrediction);
+app.use("/api/heartdisease/framinghamheartdisease", firminghamScore);
+app.use("/api/graceriskcalculation", graceCalculation);
+app.use("/api/timi", timiCalculation);
+app.use("/api/fetchRecord", fetcher);
+
+// api's to be resetted!
+
+app.use("/api/delete", deleter);
 
 mongoose
   .connect(process.env.CONNECTION_STRING, {

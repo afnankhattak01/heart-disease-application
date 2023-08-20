@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
-const GracerSchema = new schema(
+const TimiStemiSchema = new schema(
   {
     user: {
       type: schema.Types.ObjectId,
@@ -12,42 +12,46 @@ const GracerSchema = new schema(
       type: Object,
       required: true,
     },
-    age: {
-      type: Number,
+    q1: {
+      type: String,
       required: true,
     },
-    bpsys: {
-      type: Number,
-      required: true,
-    },
-
-    pulse: {
-      type: Number,
-      required: true,
-    },
-    killip: {
-      type: Number,
+    q2: {
+      type: String,
       required: true,
     },
 
-    creat_mg: {
-      type: Number,
+    q3: {
+      type: String,
       required: true,
     },
-    stchange: {
-      type: Number,
+
+    q4: {
+      type: String,
       required: true,
     },
-    carrst: {
-      type: Number,
+    q5: {
+      type: String,
       required: true,
     },
-    posinit: {
-      type: Number,
+    q6: {
+      type: String,
+      required: true,
+    },
+    q7: {
+      type: String,
+      required: true,
+    },
+    q8: {
+      type: String,
+      required: true,
+    },
+    q9: {
+      type: String,
       required: true,
     },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("gracer", GracerSchema);
+module.exports = mongoose.model("TimiRiskStemi", TimiStemiSchema);
